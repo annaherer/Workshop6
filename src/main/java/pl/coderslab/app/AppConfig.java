@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import pl.coderslab.app.converter.BookConverter;
+
 import javax.persistence.EntityManagerFactory;
 import javax.validation.Validator;
 import java.util.Locale;
@@ -26,7 +28,7 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public ViewResolver configureViewResolver() {
         InternalResourceViewResolver viewResolve = new InternalResourceViewResolver();
-        viewResolve.setPrefix("/WEB-INF/pages/");
+        viewResolve.setPrefix("/WEB-INF/views/");
         viewResolve.setSuffix(".jsp");
         return viewResolve;
     }
@@ -55,15 +57,13 @@ public class AppConfig implements WebMvcConfigurer {
         return localeResolver;
     }
 
-    /*@Override
+    @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(getAuthorConverter());
-        registry.addConverter(getArticleConverter());
-        registry.addConverter(getCategoryConverter());
+        registry.addConverter(getBookConverter());
     }
 
     @Bean
-    public AuthorConverter getAuthorConverter() {
-        return new AuthorConverter();
-    }*/
+    public BookConverter getBookConverter() {
+        return new BookConverter();
+    }
 }
